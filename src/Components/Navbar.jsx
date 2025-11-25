@@ -34,7 +34,7 @@ const Navbar = () => {
           </span>
         </motion.div>
 
-        <nav className="hidden lg:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-6 ml-28">
           {navLinks.map((item, idx) => (
             <motion.button
               key={item}
