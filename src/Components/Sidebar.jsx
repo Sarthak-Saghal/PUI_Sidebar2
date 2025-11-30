@@ -10,7 +10,7 @@ import {
   Code2,
   MessageSquare,
   GraduationCap,
-  ChevronDown,
+   ChevronDown,
   ChevronUp,
   FileEdit,
   Award,
@@ -142,13 +142,26 @@ const Sidebar = () => {
               transition={{ type: "spring", stiffness: 260, damping: 15 }}
               className={`${
                 active === item.name
-                  ? "text-[#58A6FF]" // active icon color (blue)
+                  ? "text-[#8CA9FF]" // active icon color (blue)
                   : "text-[#4A70A9]" // default initial icon color
               }`}
             >
               <item.icon size={19} />
+
             </motion.span>
-            {!isCollapsed && <span>{item.name}</span>}
+            {!isCollapsed && (
+              <span
+                className={`transition ${
+                  active === item.name
+                    ? "text-white"
+                    : "text-[#5459AC] group-hover:text-white"
+                }`}
+              >
+                {item.name}
+              </span>
+            )}
+
+
           </motion.button>
         ))}
       </nav>
@@ -174,8 +187,9 @@ const Sidebar = () => {
             initial={{ rotate: 0 }}
             animate={{ rotate: showMore ? 180 : 0 }}
             transition={{ type: "spring", stiffness: 260, damping: 18 }}
+            
           >
-            {showMore ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+            {showMore ? <ChevronUp size={18}  /> : <ChevronDown size={18} className="transition text-[#58A6FF]" />}
           </motion.span>
 
           {!isCollapsed && (
@@ -183,7 +197,11 @@ const Sidebar = () => {
               initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -8 }}
-              className="text-sm"
+                className={`text-sm transition ${
+    active === "More"
+      ? "text-white"
+      : "text-[#5459AC] group-hover:text-white"
+  }`}
             >
               More
             </motion.span>
@@ -258,9 +276,9 @@ const Sidebar = () => {
         </AnimatePresence>
       </div>
 
+  
       {/* YOUR WORK */}
-      {/* YOUR WORK */}
-      <motion.div className="mt-auto border-t border-[#30363D] pt-4">
+      <motion.div className="mt-6 border-t border-[#30363D] pt-4">
         <motion.button
           onClick={() => setShowYourWork((prev) => !prev)}
           whileHover={{ scale: 1.05 }}
@@ -272,6 +290,11 @@ const Sidebar = () => {
           <motion.span
             whileHover={{ rotate: 4, scale: 1.12 }}
             transition={{ type: "spring", stiffness: 260, damping: 16 }}
+              className={`transition ${
+    showYourWork
+      ? "text-[#8CA9FF]"        // when opened (active)
+      : "text-[#4A70A9] group-hover:text-white"   // default + hover
+  }`}
           >
             <FileEdit size={18} />
           </motion.span>
@@ -282,7 +305,11 @@ const Sidebar = () => {
                 initial={{ opacity: 0, x: -6 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -6 }}
-                className="text-sm"
+                  className={`text-sm transition ${
+    showYourWork
+      ? "text-white"
+      : "text-[#4A70A9] group-hover:text-white"
+  }`}
               >
                 Your Work
               </motion.span>
@@ -290,12 +317,18 @@ const Sidebar = () => {
               <motion.span
                 animate={{ rotate: showYourWork ? 180 : 0 }}
                 transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                className="ml-auto"
+                  className={`ml-auto transition ${
+    showYourWork ? "text-[#58A6FF]" : "text-[#B8C2D1]"
+  }`}
               >
                 {showYourWork ? (
-                  <ChevronUp size={16} />
+                  <ChevronUp size={16} 
+
+                  />
                 ) : (
-                  <ChevronDown size={16} />
+                  <ChevronDown size={16} 
+                  
+                  />
                 )}
               </motion.span>
             </>
